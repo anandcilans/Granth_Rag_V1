@@ -6,10 +6,6 @@ from langchain.chains import LLMChain
 from langchain.chat_models import ChatOpenAI
 import base64
 
-# system.sh
-!bash system.sh
-
-
 OPENAI_API_KEY = st.secrets['OPENAI_API_KEY']
 
 # Load the database

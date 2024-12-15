@@ -6,6 +6,10 @@ from langchain.chains import LLMChain
 from langchain.chat_models import ChatOpenAI
 import base64
 
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 OPENAI_API_KEY = st.secrets['OPENAI_API_KEY']
 
 # Load the database

@@ -1,0 +1,17 @@
+streamlit
+langchain
+chromadb
+openai
+HuggingFace-hub
+astor
+python-dotenv
+requests
+transformers
+sentence-transformers
+jax[cpu]
+langchain-community
+jax==0.4.37
+jaxlib==0.4.36
+tokenizers==0.21.0
+transformers==4.47.0
+onnxruntime==1.19.0

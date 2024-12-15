@@ -1,4 +1,3 @@
-import os
 import streamlit as st
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import Chroma
@@ -6,12 +5,9 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.chat_models import ChatOpenAI
 import base64
-import ast
 
-from dotenv import load_dotenv
-load_dotenv()
 
-os.environ['OPENAI_API_KEY']=os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = st.secrets['OPENAI_API_KEY']
 
 # Load the database
 def vectordb_store(selected_db):
@@ -56,7 +52,7 @@ def get_answer(query,selected_db):
     )
 
     
-    llm = ChatOpenAI(model='gpt-4o-mini',temperature=0)#,max_tokens=100
+    llm = ChatOpenAI(model='gpt-4o-mini',temperature=0,openai_api_key=OPENAI_API_KEY)#,max_tokens=100
     chain = LLMChain(llm=llm, prompt=prompt_template)
 
     return chain.run(question=query, context=results)#len(results),

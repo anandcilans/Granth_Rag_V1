@@ -5,6 +5,7 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.chat_models import ChatOpenAI
 import base64
+from chromadb.config import Settings
 
 OPENAI_API_KEY = st.secrets['OPENAI_API_KEY']
 
@@ -17,7 +18,7 @@ def vectordb_store(selected_db):
 
     persist_directory = db_options[selected_db]
     print(f"Loading database from {persist_directory}")
-    vectordb = Chroma(persist_directory=persist_directory, embedding_function=embedding_function)
+    vectordb = Chroma(persist_directory=persist_directory, embedding_function=embedding_function,client_settings=Settings(chroma_db_impl="duckdb"))
     return vectordb
 
 def get_answer(query,selected_db):

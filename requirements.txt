@@ -15,7 +15,7 @@ cachetools==5.5.0
 certifi==2024.12.14
 charset-normalizer==3.4.0
 chroma-hnswlib==0.7.6
-chromadb==0.5.20
+chromadb==0.5.23
 click==8.1.7
 coloredlogs==15.0.1
 dataclasses-json==0.6.7
@@ -102,6 +102,7 @@ pydeck==0.9.1
 Pygments==2.18.0
 PyPika==0.48.9
 pyproject_hooks==1.2.0
+pysqlite3==0.5.4
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
 pytz==2024.2

@@ -1,6 +1,6 @@
-__import__('pysqlite3') 
-import sys 
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+#__import__('pysqlite3') 
+#import sys 
+#sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 import streamlit as st
 from langchain_community.embeddings import HuggingFaceEmbeddings
@@ -86,7 +86,7 @@ def add_background_image(image_file, opacity):
     )
 
 # Call the function with your image path and desired opacity
-add_background_image("Rectangle 180.png", opacity=0.9)
+add_background_image(r"Rectangle 180.png", opacity=0.9)
 
 
 # Streamlit code
@@ -104,8 +104,8 @@ with col1:
     question = st.text_input("Ask a question")
 with col2:
     db_options = {
-        "Kamandakiya Niti Sara": "chroma_db_o.7",
-        "Shreemad BhagvadGeeta": "srmdbhgvdgeeta_chroma_db_o.7_1"
+        "Kamandakiya Niti Sara": r"chroma_db_o.7",
+        "Shreemad BhagvadGeeta": r"srmdbhgvdgeeta_chroma_db_o.7_1"
     }
     selected_db = st.selectbox("Choose Your Reference Book", list(db_options.keys()))
 

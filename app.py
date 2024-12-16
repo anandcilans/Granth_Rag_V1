@@ -1,8 +1,8 @@
-__import__('pysqlite3') 
-import sys 
-import sqlite3
+#__import__('pysqlite3') 
+#import sys 
+#import sqlite3
 
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+#sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 import streamlit as st
 from langchain_community.embeddings import HuggingFaceEmbeddings
@@ -11,26 +11,46 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.chat_models import ChatOpenAI
 import base64
+from langchain.vectorstores import FAISS
 
 OPENAI_API_KEY = st.secrets['OPENAI_API_KEY']
 
 # Load the database
+# def vectordb_store(selected_db):
+#     embedding_function = HuggingFaceEmbeddings(
+#         model_name="Alibaba-NLP/gte-base-en-v1.5",
+#         model_kwargs={"trust_remote_code": True}  # This allows loading custom model code
+#     )
+
+#     persist_directory = db_options[selected_db]
+#     print(f"Loading database from {persist_directory}")
+
+
+#     vectordb = Chroma(
+#         persist_directory=persist_directory, 
+#         embedding_function=embedding_function
+#         )
+    
+#     return vectordb
 def vectordb_store(selected_db):
     embedding_function = HuggingFaceEmbeddings(
         model_name="Alibaba-NLP/gte-base-en-v1.5",
         model_kwargs={"trust_remote_code": True}  # This allows loading custom model code
     )
-
-    persist_directory = db_options[selected_db]
-    print(f"Loading database from {persist_directory}")
-
-
-    vectordb = Chroma(
-        persist_directory=persist_directory, 
-        embedding_function=embedding_function
-        )
     
+    faiss_index_path = "faiss_index"
+
+    # Load the FAISS index with the dangerous deserialization flag enabled
+    vectordb = FAISS.load_local(
+        folder_path=faiss_index_path,
+        embeddings=embedding_function,
+        allow_dangerous_deserialization=True
+    )
+
     return vectordb
+
+
+
 
 def get_answer(query,selected_db):
     vectordb = vectordb_store(selected_db)
@@ -106,7 +126,7 @@ with col1:
     question = st.text_input("Ask a question")
 with col2:
     db_options = {
-        "Kamandakiya Niti Sara": r"chroma_db_o.7",
+        "Kamandakiya Niti Sara": r"faiss_index",
         "Shreemad BhagvadGeeta": r"srmdbhgvdgeeta_chroma_db_o.7_1"
     }
     selected_db = st.selectbox("Choose Your Reference Book", list(db_options.keys()))

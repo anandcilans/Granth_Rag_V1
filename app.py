@@ -101,7 +101,7 @@ with col1:
 with col2:
     db_options = {
         "Kamandakiya Niti Sara": "faiss_index_kamandakiya_nitisara",
-        #"Shreemad BhagvadGeeta": r"srmdbhgvdgeeta_chroma_db_o.7_1"
+        "Shreemad BhagvadGeeta": "faiss_index_bhagvad_geeta"
     }
     selected_db = st.selectbox("Choose Your Reference Book", list(db_options.keys()))
 

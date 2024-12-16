@@ -102,6 +102,7 @@ pydeck==0.9.1
 Pygments==2.18.0
 PyPika==0.48.9
 pyproject_hooks==1.2.0
+pysqlite3==0.5.4
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
 pytz==2024.2
@@ -147,4 +148,3 @@ websockets==14.1
 wrapt==1.17.0
 yarl==1.18.3
 zipp==3.21.0
-pysqlite3-binary

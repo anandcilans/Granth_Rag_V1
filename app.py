@@ -1,9 +1,3 @@
-#__import__('pysqlite3') 
-#import sys 
-#import sqlite3
-
-#sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
-
 import streamlit as st
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
@@ -21,7 +15,7 @@ def vectordb_store(selected_db):
         model_kwargs={"trust_remote_code": True}  # This allows loading custom model code
     )
     
-    faiss_index_path = selected_db
+    faiss_index_path = db_options[selected_db]
 
     # Load the FAISS index with the dangerous deserialization flag enabled
     vectordb = FAISS.load_local(
@@ -106,8 +100,8 @@ with col1:
     question = st.text_input("Ask a question")
 with col2:
     db_options = {
-        "Kamandakiya Niti Sara": r"faiss_index_kamandakiya_nitisara",
-        "Shreemad BhagvadGeeta": r"srmdbhgvdgeeta_chroma_db_o.7_1"
+        "Kamandakiya Niti Sara": "faiss_index_kamandakiya_nitisara",
+        #"Shreemad BhagvadGeeta": r"srmdbhgvdgeeta_chroma_db_o.7_1"
     }
     selected_db = st.selectbox("Choose Your Reference Book", list(db_options.keys()))
 

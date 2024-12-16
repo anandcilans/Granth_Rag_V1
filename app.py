@@ -9,7 +9,6 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.chat_models import ChatOpenAI
 import base64
-from chromadb.config import Settings
 
 OPENAI_API_KEY = st.secrets['OPENAI_API_KEY']
 

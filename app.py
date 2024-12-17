@@ -87,12 +87,28 @@ def add_background_image(image_file, opacity):
 add_background_image(r"Rectangle 180.png", opacity=0.9)
 
 
-
-#IMAGE
 # Open and resize the image
 image = Image.open("webdevelopment (3).png")
-resized_image = image.resize((80, 80))  # Specify new width and height
+resized_image = image.resize((100, 100))  # Specify new width and height
 
+# Add CSS for centering
+st.markdown(
+    """
+    <style>
+    .center-image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+# Center the image
+st.markdown('<div class="center-image">', unsafe_allow_html=True)
+st.image(resized_image)
+st.markdown('</div>', unsafe_allow_html=True)
 # Display resized image
 st.image(resized_image)
 

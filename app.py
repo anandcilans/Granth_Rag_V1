@@ -6,6 +6,7 @@ from langchain.chains import LLMChain
 from langchain.chat_models import ChatOpenAI
 import base64
 from langchain.vectorstores import FAISS
+from PIL import Image
 
 OPENAI_API_KEY = st.secrets['OPENAI_API_KEY']
 
@@ -88,25 +89,12 @@ add_background_image(r"Rectangle 180.png", opacity=0.9)
 
 
 #IMAGE
-# Centering the image using st.image
-st.markdown(
-    """
-    <style>
-    .center-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 50%; /* Optional: Adjust for centering vertically */
-        width: 50%
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+# Open and resize the image
+image = Image.open("webdevelopment (3).png")
+resized_image = image.resize((80, 80))  # Specify new width and height
 
-st.markdown('<div class="center-container">', unsafe_allow_html=True)
-st.image("webdevelopment (3).png")
-st.markdown('</div>', unsafe_allow_html=True)
+# Display resized image
+st.image(resized_image)
 
 # Title
 #st.markdown(

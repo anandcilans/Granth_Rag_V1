@@ -62,6 +62,7 @@ def get_answer(query,selected_db):
 
     return chain.run(question=query, context=results)#len(results),
 
+# Streamlit code
 #background
 # Function to encode the image to base64
 def add_background_image(image_file, opacity):
@@ -85,7 +86,7 @@ def add_background_image(image_file, opacity):
 add_background_image(r"Rectangle 180.png", opacity=0.9)
 
 
-# Streamlit code
+
 #IMAGE
 # Centering the image using st.image
 st.markdown(
@@ -95,7 +96,8 @@ st.markdown(
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100%; /* Optional: Adjust for centering vertically */
+        height: 50%; /* Optional: Adjust for centering vertically */
+        width: 50%
     }
     </style>
     """,
@@ -103,7 +105,7 @@ st.markdown(
 )
 
 st.markdown('<div class="center-container">', unsafe_allow_html=True)
-st.image("webdevelopment (3).png", caption="Centered Image")
+st.image("webdevelopment (3).png")
 st.markdown('</div>', unsafe_allow_html=True)
 
 # Title

@@ -95,7 +95,7 @@ st.markdown(
 st.markdown("<h6 style='text-align: center;color:black;'>Bringing Sacred Knowledge to Life with AI.</h6>", unsafe_allow_html=True)
 
 # Layout for question input and database selection
-col1, col2 = st.columns([3, 1])
+col1, col2 = st.columns([10,5])
 with col1:
     question = st.text_input("Ask a question")
 with col2:
@@ -116,3 +116,4 @@ if st.button("➔"):  # Unicode for a right arrow
         st.markdown(f"<div style='font-size:18px';>{answer}</div>",unsafe_allow_html=True)
     else:
         st.write("Please Select a PDF and enter a question.")
+ 

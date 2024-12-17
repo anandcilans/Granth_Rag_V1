@@ -93,7 +93,7 @@ add_background_image(r"Rectangle 180.png", opacity=0.9)
 
 # Open and resize the image
 image = Image.open("webdevelopment (3).png")
-resized_image = image.resize((110, 110))  # Specify new width and height
+resized_image = image.resize((120, 120))  # Specify new width and height
 
 # Add CSS for centering
 st.markdown(

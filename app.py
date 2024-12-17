@@ -86,11 +86,31 @@ add_background_image(r"Rectangle 180.png", opacity=0.9)
 
 
 # Streamlit code
-# Title
+#IMAGE
+# Centering the image using st.image
 st.markdown(
-    "<h1 style='text-align: center; color:black;'>GRANTH-RAG</h1>", 
-    unsafe_allow_html=True
+    """
+    <style>
+    .center-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%; /* Optional: Adjust for centering vertically */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
 )
+
+st.markdown('<div class="center-container">', unsafe_allow_html=True)
+st.image("webdevelopment (3).png", caption="Centered Image")
+st.markdown('</div>', unsafe_allow_html=True)
+
+# Title
+#st.markdown(
+#    "<h1 style='text-align: center; color:black;'>GRANTH-RAG</h1>", 
+#    unsafe_allow_html=True
+#)
 
 st.markdown("<h6 style='text-align: center;color:black;'>Bringing Sacred Knowledge to Life with AI.</h6>", unsafe_allow_html=True)
 

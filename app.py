@@ -109,8 +109,6 @@ st.markdown(
 st.markdown('<div class="center-image">', unsafe_allow_html=True)
 st.image(resized_image)
 st.markdown('</div>', unsafe_allow_html=True)
-# Display resized image
-st.image(resized_image)
 
 # Title
 #st.markdown(

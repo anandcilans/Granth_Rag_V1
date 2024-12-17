@@ -7,6 +7,9 @@ from langchain.chat_models import ChatOpenAI
 import base64
 from langchain.vectorstores import FAISS
 from PIL import Image
+# Convert the image to a base64 string (for embedding in HTML)
+import base64
+from io import BytesIO
 
 OPENAI_API_KEY = st.secrets['OPENAI_API_KEY']
 
@@ -87,6 +90,7 @@ def add_background_image(image_file, opacity):
 add_background_image(r"Rectangle 180.png", opacity=0.9)
 
 
+
 # Open and resize the image
 image = Image.open("webdevelopment (3).png")
 resized_image = image.resize((100, 100))  # Specify new width and height
@@ -105,10 +109,21 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+
+buffer = BytesIO()
+resized_image.save(buffer, format="PNG")
+image_base64 = base64.b64encode(buffer.getvalue()).decode()
+
 # Center the image
-st.markdown('<div class="center-image">', unsafe_allow_html=True)
-st.image(resized_image)
-st.markdown('</div>', unsafe_allow_html=True)
+st.markdown(
+    f"""
+    <div class="center-image">
+        <img src="data:image/png;base64,{image_base64}" alt="Centered Image" width="100">
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
 
 # Title
 #st.markdown(

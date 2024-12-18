@@ -130,7 +130,7 @@ st.markdown(
     <style>
         /* Targeting the input box under 'Ask a question' */
         div[data-testid="stTextInput"] > div > div > input {
-            width: 60px !important; /* Adjust the width as needed */
+            width: 6000px !important; /* Adjust the width as needed */
         }
     </style>
     """,

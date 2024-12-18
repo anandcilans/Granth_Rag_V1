@@ -124,7 +124,19 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-
+# Add custom CSS to control the input box width
+st.markdown(
+    """
+    <style>
+        /* Targeting the input box under 'Ask a question' */
+        div[data-testid="stTextInput"] > div > div > input {
+            width: 100% !important; /* Adjust the width as needed */
+            
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 # Title
 #st.markdown(
 #    "<h1 style='text-align: center; color:black;'>GRANTH-RAG</h1>", 

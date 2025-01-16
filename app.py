@@ -33,9 +33,10 @@ def vectordb_store(selected_db):
 def get_similarchunks_details(query,selected_db):
     vectordb = vectordb_store(selected_db)
     results = vectordb.similarity_search(query,k=10)
+    
     for res in results:
         #print(res)
-        return f"Page Number: {res.metadata.get('page_number', 'Unknown')}"
+        return f"Page Number: {res.metadata.get('page_number', 'Unknown')}" f"Chunk Content: {res.page_content}"
         print(f"Chunk Content: {res.page_content}")
         print("______________________________________")
 

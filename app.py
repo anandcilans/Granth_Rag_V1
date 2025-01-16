@@ -48,7 +48,7 @@ def get_similarchunks_details(query, selected_db):
     
     # Create a DataFrame from the list
     df = pd.DataFrame(data)
-    
+    df.index = range(1, len(df) + 1)
     return df
 
 

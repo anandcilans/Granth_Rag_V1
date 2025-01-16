@@ -186,6 +186,9 @@ if st.button("➔"):  # Unicode for a right arrow
         st.markdown("</div>", unsafe_allow_html=True)
         #st.write(answer)
         st.markdown(f"<div style='font-size:18px';>{answer}</div>",unsafe_allow_html=True)
+        # Display the DataFrame in Streamlit
+        st.subheader("Source of Information : ")
+        st.dataframe(source)
         st.markdown(f"<div style='font-size:18px';>--> Source_of_information:{source}</div>",unsafe_allow_html=True)
         
     else:

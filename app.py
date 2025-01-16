@@ -43,7 +43,7 @@ def get_similarchunks_details(query, selected_db):
     for res in results:
         data.append({
             "Page Number": res.metadata.get("page_number", "Unknown"),
-            "Page Content": res.page_content
+            "Chunk": res.page_content
         })
     
     # Create a DataFrame from the list

@@ -30,12 +30,15 @@ def vectordb_store(selected_db):
 
     return vectordb
 
+def get_similarchunks_details(query,selected_db):
+    vectordb = vectordb_store(selected_db)
+    results = vectordb.similarity_search(query,k=10)
+    return results
+
+
 def get_answer(query,selected_db):
     vectordb = vectordb_store(selected_db)
     results = vectordb.similarity_search(query,k=10)
-    for res in results:
-        print(res)
-        print("______________________________________")
    
     prompt_template = PromptTemplate(
         input_variables=['query', 'context'],
@@ -65,6 +68,7 @@ def get_answer(query,selected_db):
     chain = LLMChain(llm=llm, prompt=prompt_template)
 
     return chain.run(question=query, context=results)#len(results),
+
 
 # Streamlit code
 #background
@@ -162,9 +166,11 @@ if st.button("➔"):  # Unicode for a right arrow
         st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
         with st.spinner("Searching... Please wait for a few seconds."):
             answer = get_answer(question, selected_db)
+            source = get_similarchunks_details(question,selected_db)
         st.markdown("</div>", unsafe_allow_html=True)
         #st.write(answer)
         st.markdown(f"<div style='font-size:18px';>{answer}</div>",unsafe_allow_html=True)
+        st.write(f"Source_of_information:{source}")
     else:
         st.write("Please Select a PDF and enter a question.")
  

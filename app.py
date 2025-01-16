@@ -189,7 +189,6 @@ if st.button("➔"):  # Unicode for a right arrow
         # Display the DataFrame in Streamlit
         st.subheader("Source of Information : ")
         st.dataframe(source)
-        st.markdown(f"<div style='font-size:18px';>--> Source_of_information:{source}</div>",unsafe_allow_html=True)
         
     else:
         st.write("Please Select a PDF and enter a question.")

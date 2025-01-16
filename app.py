@@ -7,6 +7,7 @@ from langchain.chat_models import ChatOpenAI
 import base64
 from langchain.vectorstores import FAISS
 from PIL import Image
+import pandas as pd
 # Convert the image to a base64 string (for embedding in HTML)
 import base64
 from io import BytesIO
@@ -30,16 +31,26 @@ def vectordb_store(selected_db):
 
     return vectordb
 
-def get_similarchunks_details(query,selected_db):
+def get_similarchunks_details(query, selected_db):
+    # Initialize the vector store from the selected database
     vectordb = vectordb_store(selected_db)
-    results = vectordb.similarity_search(query,k=10)
     
+    # Perform similarity search
+    results = vectordb.similarity_search(query, k=10)
+    
+    # Collect page numbers and content into a list
+    data = []
     for res in results:
-        #print(res)
-        return f"Page Number: {res.metadata.get('page_number', 'Unknown')}"
-    for res in results:
-        return f"Chunk Content: {res.page_content}"
-        
+        data.append({
+            "Page Number": res.metadata.get("page_number", "Unknown"),
+            "Page Content": res.page_content
+        })
+    
+    # Create a DataFrame from the list
+    df = pd.DataFrame(data)
+    
+    return df
+
 
 def get_answer(query,selected_db):
     vectordb = vectordb_store(selected_db)

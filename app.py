@@ -170,7 +170,8 @@ if st.button("➔"):  # Unicode for a right arrow
         st.markdown("</div>", unsafe_allow_html=True)
         #st.write(answer)
         st.markdown(f"<div style='font-size:18px';>{answer}</div>",unsafe_allow_html=True)
-        st.write(f"Source_of_information:{source}")
+        st.markdown(f"<div style='font-size:18px';>--> Source_of_information:{source}</div>",unsafe_allow_html=True)
+        
     else:
         st.write("Please Select a PDF and enter a question.")
  

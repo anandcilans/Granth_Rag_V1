@@ -1,6 +1,7 @@
 streamlit
 langchain-community
 langchain
+langchain-openai
 openai
 huggingface-hub
 chromadb

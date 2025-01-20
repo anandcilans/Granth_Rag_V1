@@ -2,7 +2,6 @@ from langchain.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS,DistanceStrategy
 import streamlit as st
 from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_community.vectorstores import Chroma
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.chat_models import ChatOpenAI

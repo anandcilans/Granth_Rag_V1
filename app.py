@@ -172,14 +172,16 @@ with col1:
     question = st.text_area("Ask a question",height=120)
 
 with col2:
+
+    languages = ["English", "Gujarati"]
+    selected_language = st.selectbox("Language", languages)
+    
     db_options = {
         "Kamandakiya Niti Sara": "faiss_index_kamandakiya_nitisara",
         "Shreemad BhagvadGeeta": "faiss_index_bhagvad_geeta"
     }
     selected_db = st.selectbox("Choose Your Reference Book", list(db_options.keys()))
 
-    languages = ["English", "Gujarati"]
-    selected_language = st.selectbox("Language", languages)
 
 
 if st.button("➔"):  # Unicode for a right arrow

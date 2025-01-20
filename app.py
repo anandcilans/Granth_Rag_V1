@@ -181,11 +181,13 @@ with col2:
             "Kamandakiya Niti Sara": "faiss_index_kamandakiya_nitisara",
             "Shreemad BhagvadGeeta": "faiss_index_bhagvad_geeta"
         }
+        selected_db = st.selectbox("Choose Your Reference Book", list(db_options.keys()))
+        
     elif languages == "Gujarati":
         db_options = {
             "Smd BhagvadGeeta": "faiss_index_kamandakiya_nitisara"}
         
-    selected_db = st.selectbox("Choose Your Reference Book", list(db_options.keys()))
+        selected_db = st.selectbox("Choose Your Reference Book", list(db_options.keys()))
 
 
 

@@ -1,3 +1,5 @@
+from langchain.embeddings import OpenAIEmbeddings
+from langchain_community.vectorstores import FAISS,DistanceStrategy
 import streamlit as st
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
@@ -86,17 +88,19 @@ def get_answer(query,selected_db):
     return chain.run(question=query, context=results)#len(results),
 
 def vectordb_store2(selected_db):
-    embedding_function = HuggingFaceEmbeddings(
-        model_name="Alibaba-NLP/gte-base-en-v1.5",
-        model_kwargs={"trust_remote_code": True}  # This allows loading custom model code
-    )
+    embedding_model = OpenAIEmbeddings(model="text-embedding-3-large")
+    # embedding_function = HuggingFaceEmbeddings(
+    #     model_name="Alibaba-NLP/gte-base-en-v1.5",
+    #     model_kwargs={"trust_remote_code": True}  # This allows loading custom model code
+    # )
     
     faiss_index_path = db_options[selected_db]
 
     # Load the FAISS index with the dangerous deserialization flag enabled
     vectordb = FAISS.load_local(
         folder_path=faiss_index_path,
-        embeddings=embedding_function,
+        embeddings=embedding_model,
+        distance_strategy=DistanceStrategy.COSINE,
         allow_dangerous_deserialization=True
     )
 
@@ -287,5 +291,4 @@ if st.button("➔"):  # Unicode for a right arrow
         
     else:
         st.write("Please Select a PDF and enter a question.")
- 
  

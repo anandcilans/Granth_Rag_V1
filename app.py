@@ -178,7 +178,7 @@ with col2:
     }
     selected_db = st.selectbox("Choose Your Reference Book", list(db_options.keys()))
 
-    languages = ["English", "Hindi", "Sanskrit"]
+    languages = ["English", "Gujarati"]
     selected_language = st.selectbox("Language", languages)
 
 

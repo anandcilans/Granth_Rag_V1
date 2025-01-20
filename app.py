@@ -166,15 +166,20 @@ st.markdown(
 st.markdown("<h6 style='text-align: center;color:black;'>Bringing Sacred Knowledge to Life with AI.</h6>", unsafe_allow_html=True)
 
 # Layout for question input and database selection
-col1, col2 = st.columns([15,8])
+col1, col2,col3 = st.columns([15,8,2])
+
 with col1:
     question = st.text_area("Ask a question",height=75)
+
 with col2:
     db_options = {
         "Kamandakiya Niti Sara": "faiss_index_kamandakiya_nitisara",
         "Shreemad BhagvadGeeta": "faiss_index_bhagvad_geeta"
     }
     selected_db = st.selectbox("Choose Your Reference Book", list(db_options.keys()))
+
+with col3:
+    question = st.text_area("Ask a question",height=75)
 
 if st.button("➔"):  # Unicode for a right arrow
     if question:

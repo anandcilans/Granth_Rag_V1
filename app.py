@@ -166,7 +166,7 @@ st.markdown(
 st.markdown("<h6 style='text-align: center;color:black;'>Bringing Sacred Knowledge to Life with AI.</h6>", unsafe_allow_html=True)
 
 # Layout for question input and database selection
-col1, col2, col3 = st.columns([15,8,8])
+col1, col2, col3 = st.columns([15,8,2])
 
 with col1:
     question = st.text_area("Ask a question",height=75)
@@ -182,7 +182,7 @@ with col3:
     languages = ["English", "Hindi", "Sanskrit"]
     selected_language = st.selectbox("Select Language", languages)
 
-    
+
 if st.button("➔"):  # Unicode for a right arrow
     if question:
         # Center the spinner

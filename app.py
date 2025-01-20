@@ -169,7 +169,7 @@ st.markdown("<h6 style='text-align: center;color:black;'>Bringing Sacred Knowled
 col1, col2 = st.columns([15,8])
 
 with col1:
-    question = st.text_area("Ask a question",height=75)
+    question = st.text_area("Ask a question",height=100)
 
 with col2:
     db_options = {

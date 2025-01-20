@@ -264,7 +264,7 @@ with col2:
 
     # Dropdown for selecting database
     if db_options:
-        selected_db = st.selectbox("Select a PDF", list(db_options.keys()))
+        selected_db = st.selectbox("Your reference book", list(db_options.keys()))
     else:
         st.warning("No database options available for the selected language.")
 

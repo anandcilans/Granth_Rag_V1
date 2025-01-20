@@ -166,27 +166,34 @@ st.markdown(
 st.markdown("<h6 style='text-align: center;color:black;'>Bringing Sacred Knowledge to Life with AI.</h6>", unsafe_allow_html=True)
 
 # Layout for question input and database selection
-col1, col2 = st.columns([15,8])
+col1, col2 = st.columns([15, 8])
 
 with col1:
-    question = st.text_area("Ask a question",height=120)
+    question = st.text_area("Ask a question", height=120)
 
 with col2:
-
+    # Language selection
     languages = ["English", "Gujarati"]
     selected_language = st.selectbox("Language", languages)
-    
-    if languages == "English":    
+
+    # Define database options based on selected language
+    if selected_language == "English":
         db_options = {
             "Kamandakiya Niti Sara": "faiss_index_kamandakiya_nitisara",
             "Shreemad BhagvadGeeta": "faiss_index_bhagvad_geeta"
         }
-        
-    elif languages == "Gujarati":
+    elif selected_language == "Gujarati":
         db_options = {
-            "Smd BhagvadGeeta": "faiss_index_kamandakiya_nitisara"}
-        
-    selected_db = st.selectbox("Select a PDF", list(db_options.keys()))
+            "શ્રીમદ ભાગવદ ગીતા": "faiss_index_bhagvad_geeta"
+        }
+    else:
+        db_options = {}
+
+    # Dropdown for selecting database
+    if db_options:
+        selected_db = st.selectbox("Select a PDF", list(db_options.keys()))
+    else:
+        st.warning("No database options available for the selected language.")
 
 
 if st.button("➔"):  # Unicode for a right arrow

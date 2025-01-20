@@ -85,6 +85,76 @@ def get_answer(query,selected_db):
 
     return chain.run(question=query, context=results)#len(results),
 
+def vectordb_store2(selected_db):
+    embedding_function = HuggingFaceEmbeddings(
+        model_name="Alibaba-NLP/gte-base-en-v1.5",
+        model_kwargs={"trust_remote_code": True}  # This allows loading custom model code
+    )
+    
+    faiss_index_path = db_options[selected_db]
+
+    # Load the FAISS index with the dangerous deserialization flag enabled
+    vectordb = FAISS.load_local(
+        folder_path=faiss_index_path,
+        embeddings=embedding_function,
+        allow_dangerous_deserialization=True
+    )
+
+    return vectordb
+
+def get_similarchunks_details2(query, selected_db):
+    # Initialize the vector store from the selected database
+    vectordb = vectordb_store2(selected_db)
+    
+    # Perform similarity search
+    results = vectordb.similarity_search(query, k=10)
+    
+    # Collect page numbers and content into a list
+    data = []
+    for res in results:
+        data.append({
+            "Page Number": res.metadata.get("page_number", "Unknown"),
+            "Chunk": res.page_content
+        })
+    
+    # Create a DataFrame from the list
+    df = pd.DataFrame(data)
+    df.index = range(1, len(df) + 1)
+    return df
+
+def get_answer2(query,selected_db):
+    vectordb = vectordb_store2(selected_db)
+    results = vectordb.similarity_search(query,k=10)
+   
+    prompt_template = PromptTemplate(
+        input_variables=['query', 'context'],
+        template="""
+        You are an expert assistant specializing in answering questions based on the Bhagavad Gita.
+        Your task is to thoroughly understand the provided context of shreemad bhagvadgeeta and answer the user's question as accurately and clearly as possible.
+        Keep your response concise, human-friendly, and to the point. If user asks casual question than you can communicate , keep conversation more human like, it must be decent.
+        If user asks question in any other language, than you have to respond answer in gujarati all the time.
+        
+        Important:
+
+        - Only answer based on the provided context. Do not fabricate or make assumptions.
+        - Sometime user will make spelling mistake in question , you have to understand the question and provide answer.
+        - If no relevant answer can be found, respond with "Answer is not available in this book."
+        - Avoid mentioning the source of the answer in your response, such as "according to the context."
+
+        Context: {context}
+
+        Question: {question}
+
+        Answer:
+        """
+    )
+
+    
+    llm = ChatOpenAI(model='gpt-4o-mini',temperature=0,openai_api_key=OPENAI_API_KEY)#,max_tokens=100
+    chain = LLMChain(llm=llm, prompt=prompt_template)
+
+    return chain.run(question=query, context=results)#len(results),
+
 
 # Streamlit code
 #background
@@ -184,7 +254,7 @@ with col2:
         }
     elif selected_language == "Gujarati":
         db_options = {
-            "શ્રીમદ ભાગવદ ગીતા": "faiss_index_bhagvad_geeta"
+            "શ્રીમદ ભાગવદ ગીતા": "faiss_guj_smd_bhagvatam"
         }
     else:
         db_options = {}
@@ -201,8 +271,13 @@ if st.button("➔"):  # Unicode for a right arrow
         # Center the spinner
         st.markdown("<div style='text-align: center;'>", unsafe_allow_html=True)
         with st.spinner("Searching... Please wait for a few seconds."):
-            answer = get_answer(question, selected_db)
-            source = get_similarchunks_details(question,selected_db)
+            if selected_language == "English":
+                answer = get_answer(question, selected_db)
+                source = get_similarchunks_details(question,selected_db)
+            elif selected_language == "Gujarati":
+                answer = get_answer2(question, selected_db)
+                source = get_similarchunks_details2(question,selected_db)
+
         st.markdown("</div>", unsafe_allow_html=True)
         #st.write(answer)
         st.markdown(f"<div style='font-size:18px';>{answer}</div>",unsafe_allow_html=True)

@@ -151,6 +151,27 @@ def get_answer2(query,selected_db):
         Answer:
         """
     )
+    
+    #     template="""
+    #     You are an expert assistant specializing in answering questions based on the Bhagavad Gita.
+    #     Your task is to thoroughly understand the provided context of shreemad bhagvadgeeta and answer the user's question as accurately and clearly as possible.
+    #     Keep your response concise, human-friendly, and to the point. If user asks casual question than you can communicate , keep conversation more human like, it must be decent.
+    #     If user asks question in any other language, than you have to respond answer in gujarati all the time.
+        
+    #     Important:
+
+    #     - Only answer based on the provided context. Do not fabricate or make assumptions.
+    #     - Sometime user will make spelling mistake in question , you have to understand the question and provide answer.
+    #     - If no relevant answer can be found, respond with "Answer is not available in this book."
+    #     - Avoid mentioning the source of the answer in your response, such as "according to the context."
+
+    #     Context: {context}
+
+    #     Question: {question}
+
+    #     Answer:
+    #     """
+    # )
 
     
     llm = ChatOpenAI(model='gpt-4o-mini',temperature=0,openai_api_key=OPENAI_API_KEY)#,max_tokens=100

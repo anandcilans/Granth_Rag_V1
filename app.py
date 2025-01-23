@@ -132,8 +132,8 @@ def get_answer2(query,selected_db):
     prompt_template = PromptTemplate(
         input_variables=['query', 'context'],
         template="""
-        You are an expert assistant specializing in answering questions based on the Bhagavad Gita.
-        Your task is to thoroughly understand the provided context of shreemad bhagvadgeeta and answer the user's question as accurately and clearly as possible.
+        You are an expert assistant specializing in answering questions based on given context.
+        Your task is to thoroughly understand the provided context of given context and answer the user's question as accurately and clearly as possible.
         Keep your response concise, human-friendly, and to the point. If user asks casual question than you can communicate , keep conversation more human like, it must be decent.
         If user asks question in any other language, than you have to respond answer in gujarati all the time.
         

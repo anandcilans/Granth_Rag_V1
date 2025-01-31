@@ -11,12 +11,10 @@ import pandas as pd
 import os
 import shutil  # For cleaning up merged databases
 
-# OPENAI_API_KEY = st.secrets['OPENAI_API_KEY']
-from dotenv import load_dotenv
-load_dotenv()
+
+OPENAI_API_KEY = st.secrets['OPENAI_API_KEY']
 
 # Get API key with fallback
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 if not OPENAI_API_KEY:
     st.error("OpenAI API key not found in environment variables")
     OPENAI_API_KEY = st.text_input("Enter your OpenAI API key:", type="password")
